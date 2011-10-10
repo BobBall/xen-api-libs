@@ -334,9 +334,8 @@ external __get_all : unit -> (string * string * string * bool) list = "stub_if_g
 
 type addr = IPV4 of string * string | IPV6 of string * string
 
-let get_all () =
-	List.map (fun (name, addr, netmask, inet6) -> name, if inet6 then IPV6 (addr,netmask) else IPV4 (addr,netmask))
-	         (__get_all ())
+let get_all name =
+	List.map (fun (a,b,c,d) -> (b,c,d)) (List.filter (fun (dev, _, _, _) -> dev = name) (__get_all ()))
 
 let get_all_ipv4 () =
 	let ipv4s = List.filter (fun (_, _, _, inet6) -> not inet6) (__get_all ()) in

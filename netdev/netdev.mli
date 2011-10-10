@@ -103,8 +103,11 @@ module Addr :
     (** Flush all the addresses configured on a device. *)
     val flush : string -> unit
 
-    (** Get all IPV4 addresses associated with a device. *)
+    (** Get all IPV4 addresses associated with a device.  Return value is (IP address, netmask)*)
     val get : string -> (Unix.inet_addr * Unix.inet_addr) list
+
+    (** Get all IPV4 and IPV6 addresses associated with a device.  Return value is (IP address, netmask, IPv6 flag) *)
+    val get_all : string -> (string * string * bool) list
   end
 
 (** List all the interfaces on the system. *)
